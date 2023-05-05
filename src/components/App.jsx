@@ -10,31 +10,36 @@ import css from 'components/App.module.css';
 
 export class App extends Component {
   state = {
-    // contacts: [
-    //   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    //   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    //   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    // ],
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    // contacts: [],
     filter: '',
     showModal: false,
   };
 
   componentDidMount() {
+    // console.log(this.state.contacts);
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
+    // console.log(contacts);
+    // console.log(parsedContacts);
 
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
+    } else {
+      this.setState({ contacts: this.state.contacts });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     const nextContacts = this.state.contacts;
     const prevContacts = prevState.contacts;
-    console.log(nextContacts);
-    console.log(prevContacts);
+    // console.log(nextContacts);
+    // console.log(prevContacts);
 
     if (nextContacts !== prevContacts) {
       localStorage.setItem('contacts', JSON.stringify(nextContacts));
@@ -111,7 +116,7 @@ export class App extends Component {
         </button>
         {showModal && (
           <Modal onClose={this.toggleModal}>
-            <h2 className={css.titleSection}>Contact List</h2>
+            <h2 className={css.titleSection}>Add Contact</h2>
             <ContactForm onSubmit={this.addContact} />
             <button
               className={css.closeBtnModal}
