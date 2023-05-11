@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { BiUserPlus } from 'react-icons/bi';
 import css from './ContactForm.module.css';
 
 export class ContactForm extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+  };
+
   state = {
     name: '',
     number: '',
@@ -24,6 +30,9 @@ export class ContactForm extends Component {
     this.setState({ name: '', number: '' });
   };
 
+  closeFormAfterAddContact =() => {
+    this.props.onClose();
+  }
   render() {
     const { name, number } = this.state;
 
@@ -58,7 +67,7 @@ export class ContactForm extends Component {
           />
         </label>
 
-        <button className={css.btnAdd} type="submit">
+        <button className={css.btnAdd} type="submit" onCloseForm ={this.closeFormAfterAddContact} >
           <BiUserPlus className={css.btnAddIcon} size={25} />
           <span className={css.btnAddText}>Add contact</span>
         </button>
