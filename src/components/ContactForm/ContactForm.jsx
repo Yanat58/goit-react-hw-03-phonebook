@@ -6,7 +6,6 @@ import css from './ContactForm.module.css';
 export class ContactForm extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired,
   };
 
   state = {
@@ -30,9 +29,6 @@ export class ContactForm extends Component {
     this.setState({ name: '', number: '' });
   };
 
-  closeFormAfterAddContact =() => {
-    this.props.onClose();
-  }
   render() {
     const { name, number } = this.state;
 
@@ -67,7 +63,7 @@ export class ContactForm extends Component {
           />
         </label>
 
-        <button className={css.btnAdd} type="submit" onCloseForm ={this.closeFormAfterAddContact} >
+        <button className={css.btnAdd} type="submit">
           <BiUserPlus className={css.btnAddIcon} size={25} />
           <span className={css.btnAddText}>Add contact</span>
         </button>

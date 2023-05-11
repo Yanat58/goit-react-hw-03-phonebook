@@ -7,7 +7,7 @@ const modalRoot = document.querySelector('#modal-root');
 
 export class Modal extends Component {
   static propTypes = {
-    children: PropTypes.element,
+    children: PropTypes.node,
     onClose: PropTypes.func.isRequired,
   };
 
@@ -32,7 +32,7 @@ export class Modal extends Component {
 
   render() {
     return createPortal(
-      <div className={css.modalBackdrop} >
+      <div className={css.modalBackdrop}>
         <div className={css.modalContent}>{this.props.children}</div>
       </div>,
       modalRoot
